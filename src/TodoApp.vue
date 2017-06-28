@@ -1,12 +1,19 @@
 <template lang="jade">
   .todo-app
     h1 Todo List
-    search-bar(:onChange="onSearchTextChange")
-    | New Todo: 
-    editor(:onSubmit="addTodo")
-    button(@click="showRemoveButton = !showRemoveButton")
-      {{ showRemoveButton ? 'Hide Remove' : 'Remove' }}
-    button(@click="clearCompletedTasks") clear completed
+    .row
+      .control
+        | ➕ 
+        editor(:onSubmit="addTodo")
+      .control
+        button(@click="showRemoveButton = !showRemoveButton")
+          {{ showRemoveButton ? 'Hide Remove' : 'Remove Task' }}
+    .row
+      .control
+        | 🔎 
+        input(v-model="searchText")
+      .control
+        button(@click="clearCompletedTasks") clear completed
 
     todo-list(
       :showRemoveButton="showRemoveButton",
@@ -17,19 +24,21 @@
     )
 </template>
 
-<style>
+<style scoped>
+ .control {
+    display: inline-block;
+    margin-right: 10px;
+ }
 </style>
 
 <script>
   import TextFieldEditor from './TextFieldEditor.vue';
-  import SearchBar from './SearchBar.vue';
   import TodoList from './TodoList.vue';
 
   export default {
 
     components: {
       'editor': TextFieldEditor,
-      'search-bar': SearchBar,
       'todo-list': TodoList,
     },
 
@@ -63,10 +72,6 @@
     },
 
     methods: {
-      onSearchTextChange(searchText) {
-        this.searchText = searchText;
-        console.log('searchText = ' + searchText)
-      },
       onTodoItemToggleDone(id) {
         const todo = this.getTodoById(id);
         todo.done = !todo.done;
