@@ -1,8 +1,8 @@
 <template lang="jade">
   input(
     v-model="editingText",
-    @keyup.enter="onSubmit",
-    @blur="onSubmit",
+    @keyup.enter="_onSubmit",
+    @blur="_onSubmit",
     ref="input",
   )
 </template>
@@ -12,13 +12,13 @@
     props: {
       editing: {
         type: Boolean,
-        required: true,
+        default: false,
       },
       originalText: {
         type: String,
-        required: true,
+        default: '',
       },
-      onEditingDone: Function,
+      onSubmit: Function,
     },
     data() {
       return {
@@ -26,9 +26,9 @@
       };
     },
     methods: {
-      onSubmit() {
-        if (typeof this.onEditingDone !== 'function') return;
-        this.onEditingDone(this.editingText);
+      _onSubmit() {
+        if (typeof this.onSubmit !== 'function') return;
+        this.onSubmit(this.editingText);
         this.editingText = '';
       },
     },
