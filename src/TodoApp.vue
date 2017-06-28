@@ -2,6 +2,8 @@
   .todo-app
     h1 Todo List
     search-bar(:onChange="onSearchTextChange")
+    | New Todo: 
+    editor(:onSubmit="addTodo")
     button(@click="showRemoveButton = !showRemoveButton")
       {{ showRemoveButton ? 'Hide Remove' : 'Remove' }}
     button(@click="clearCompletedTasks") clear completed
@@ -19,12 +21,14 @@
 </style>
 
 <script>
+  import TextFieldEditor from './TextFieldEditor.vue';
   import SearchBar from './SearchBar.vue';
   import TodoList from './TodoList.vue';
 
   export default {
 
     components: {
+      'editor': TextFieldEditor,
       'search-bar': SearchBar,
       'todo-list': TodoList,
     },
@@ -77,6 +81,14 @@
       },
       clearCompletedTasks() {
         this.todos = this.todos.filter(todo => !todo.done);
+      },
+      addTodo(text) {
+        if (!text) return;
+        this.todos.push({
+          id: Date.now() + '',
+          title: text,
+          done: false,
+        });
       },
       getTodoById(id) {
         return this.todos.find(todo => todo.id === id);
