@@ -4,6 +4,8 @@
     search-bar(:onChange="onSearchTextChange")
     button(@click="showRemoveButton = !showRemoveButton")
       {{ showRemoveButton ? 'Hide Remove' : 'Remove' }}
+    button(@click="clearCompletedTasks") clear completed
+
     todo-list(
       :showRemoveButton="showRemoveButton",
       :todos="filteredTodos",
@@ -71,6 +73,9 @@
       },
       onTodoItemRemove(id) {
         this.todos = this.todos.filter(todo => todo.id !== id);
+      },
+      clearCompletedTasks() {
+        this.todos = this.todos.filter(todo => !todo.done);
       },
       getTodoById(id) {
         return this.todos.find(todo => todo.id === id);
