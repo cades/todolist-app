@@ -68,6 +68,7 @@
         todo.done = !todo.done;
       },
       onTodoItemEditTitle(id, newTitle) {
+        if (!newTitle) return alert('todo can not be empty!')
         const todo = this.getTodoById(id);
         todo.title = newTitle;
       },
