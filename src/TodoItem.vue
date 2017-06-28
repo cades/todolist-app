@@ -2,13 +2,7 @@
   .todo-item(:class="{ checked: done }")
     .checkbox(@click="onDoneClick")
     .title(v-show="!editing", @dblclick="onTitleClick") {{title}}
-    input(
-      v-show="editing",
-      v-model="editingText",
-      @keyup.enter="onEditingDone",
-      @blur="onEditingDone",
-      ref="input",
-    )
+    editor(v-show="editing", :editing="editing", :originalTitle="title", :onEditingDone="onEditingDone")
 </template>
 
 <style scoped>
@@ -33,7 +27,13 @@
 </style>
 
 <script>
-  export default {
+  import TextFieldEditor from './TextFieldEditor.vue';
+
+ export default {
+     components: {
+       editor: TextFieldEditor,
+     },
+
     props: {
       title: {
         type: String,
@@ -53,7 +53,6 @@
     data() {
       return {
         editing: false,
-        editingText: '',
       };
     },
     methods: {
@@ -62,13 +61,10 @@
         this.onToggleDone(this.id);
       },
       onTitleClick() {
-        this.editingText = this.title;
         this.editing = true;
-        this.$nextTick(() => this.$refs.input.focus());
       },
-      onEditingDone() {
-        if (typeof this.onEditTitle !== 'function') return;
-        this.onEditTitle(this.id, this.editingText);
+      onEditingDone(newTitle) {
+        this.onEditTitle(this.id, newTitle);
         this.editing = false;
       },
     },
