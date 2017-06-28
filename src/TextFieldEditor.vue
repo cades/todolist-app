@@ -29,6 +29,7 @@
       onSubmit() {
         if (typeof this.onEditingDone !== 'function') return;
         this.onEditingDone(this.editingText);
+        this.editingText = '';
       },
     },
     watch: {
