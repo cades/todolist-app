@@ -27,17 +27,17 @@
       return {
         searchText: '',
         todos: [{
-            id: '111',
-            title: '唱題',
-            done: false,
+          id: '111',
+          title: '唱題',
+          done: false,
         }, {
-            id: '222',
-            title: '寫面試題',
-            done: false,
+          id: '222',
+          title: '寫面試題',
+          done: false,
         }, {
-            id: '333',
-            title: '反省',
-            done: true,
+          id: '333',
+          title: '反省',
+          done: true,
         }],
       }
     },
@@ -45,7 +45,7 @@
     computed: {
       filteredTodos() {
         if (!this.searchText)
-            return this.todos;
+          return this.todos;
         const target = new RegExp(this.searchText);
         return this.todos.filter(item => item.title.match(target));
       },
