@@ -14,7 +14,7 @@
         type: Boolean,
         required: true,
       },
-      originalTitle: {
+      originalText: {
         type: String,
         required: true,
       },
@@ -34,7 +34,7 @@
     watch: {
       editing(isEditing) {
         if (!isEditing) return;
-        this.editingText = this.originalTitle;
+        this.editingText = this.originalText;
         this.$refs.input.focus();
       },
     }

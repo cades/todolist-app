@@ -2,7 +2,7 @@
   .todo-item(:class="{ checked: done }")
     .checkbox(@click="onDoneClick")
     .title(v-show="!editing", @dblclick="onTitleClick") {{title}}
-    editor(v-show="editing", :editing="editing", :originalTitle="title", :onEditingDone="onEditingDone")
+    editor(v-show="editing", :editing="editing", :originalText="title", :onEditingDone="onEditingDone")
 </template>
 
 <style scoped>
