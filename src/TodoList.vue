@@ -1,14 +1,14 @@
 <template lang="jade">
   ul.todo-list
-    todo-item(
-      v-for="todo in todos",
-      :key="todo.id",
-      :title="todo.title",
-      :done="todo.done",
-      :id="todo.id",
-      :onToggleDone="onToggleDone",
-      :onEditTitle="onEditTitle",
-    )
+    li(v-for="todo in todos")
+      todo-item(
+        :key="todo.id",
+        :title="todo.title",
+        :done="todo.done",
+        :id="todo.id",
+        :onToggleDone="onToggleDone",
+        :onEditTitle="onEditTitle",
+      )
 </template>
 
 <style scoped>

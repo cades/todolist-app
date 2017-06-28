@@ -1,5 +1,5 @@
 <template lang="jade">
-  li.todo-item(:class="{ checked: done }")
+  .todo-item(:class="{ checked: done }")
     .checkbox(@click="onDoneClick")
     .title(v-show="!editing", @dblclick="onTitleClick") {{title}}
     input(
