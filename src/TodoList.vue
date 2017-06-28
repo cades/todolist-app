@@ -11,6 +11,12 @@
     )
 </template>
 
+<style scoped>
+  ul {
+    list-style-type: none;
+  }
+</style>
+
 <script>
   import TodoItem from './TodoItem.vue';
 
