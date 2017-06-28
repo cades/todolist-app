@@ -46,19 +46,7 @@
       return {
         searchText: '',
         showRemoveButton: false,
-        todos: [{
-          id: '111',
-          title: '唱題',
-          done: false,
-        }, {
-          id: '222',
-          title: '寫面試題',
-          done: false,
-        }, {
-          id: '333',
-          title: '反省',
-          done: true,
-        }],
+        todos: [],
       }
     },
 
@@ -98,6 +86,18 @@
       getTodoById(id) {
         return this.todos.find(todo => todo.id === id);
       },
+    },
+
+    watch: {
+      todos(newTodos) {
+        if (!localStorage) return;
+        localStorage.setItem('todos', JSON.stringify(newTodos));
+      },
+    },
+
+    mounted() {
+      if (!localStorage) return;
+      this.todos = JSON.parse(localStorage.getItem('todos') || '[]')
     },
   };
 </script>
