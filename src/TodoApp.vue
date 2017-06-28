@@ -2,10 +2,14 @@
   .todo-app
     h1 Todo List
     search-bar(:onChange="onSearchTextChange")
+    button(@click="showRemoveButton = !showRemoveButton")
+      {{ showRemoveButton ? 'Hide Remove' : 'Remove' }}
     todo-list(
+      :showRemoveButton="showRemoveButton",
       :todos="filteredTodos",
       :onTodoItemToggleDone="onTodoItemToggleDone",
       :onTodoItemEditTitle="onTodoItemEditTitle",
+      :onTodoItemRemove="onTodoItemRemove",
     )
 </template>
 
@@ -26,6 +30,7 @@
     data() {
       return {
         searchText: '',
+        showRemoveButton: false,
         todos: [{
           id: '111',
           title: '唱題',
@@ -63,6 +68,9 @@
       onTodoItemEditTitle(id, newTitle) {
         const todo = this.getTodoById(id);
         todo.title = newTitle;
+      },
+      onTodoItemRemove(id) {
+        this.todos = this.todos.filter(todo => todo.id !== id);
       },
       getTodoById(id) {
         return this.todos.find(todo => todo.id === id);
