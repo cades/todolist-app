@@ -8,7 +8,7 @@
     "prepare-dist": "mkdir -p dist",
     "dev": "npm run prepare-dist && cross-env NODE_ENV=development webpack-dev-server --inline --hot --progress --host 0.0.0.0 --port 3000 --config webpack.config.js",
     "build": "cross-env NODE_ENV=production webpack --progress --hide-modules --config webpack.config.js",
-    "prepare-public": "cp index.html public/ && cp -a dist public/",
+    "prepare-public": "mkdir -p public && cp index.html public/ && cp -a dist public/",
     "deploy": "npm run clean && npm run build && npm run prepare-public && netlify deploy"
   },
   "dependencies": {
